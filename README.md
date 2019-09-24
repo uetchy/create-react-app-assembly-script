@@ -1,3 +1,27 @@
+# Create React App + Assembly Script
+
+```
+yarn create react-app app --typescript
+cd app
+yarn add -D AssemblyScript/assemblyscript
+yarn asinit .
+sed -i -e 's/npm run/yarn/g' ./package.json
+sed -i -e 's|build/untouched|public/as-api|g' ./package.json
+sed -i -e 's|build/optimized|public/as-api|g' ./package.json
+sed -i -e 's/react-scripts build/yarn asbuild \&\& react-scripts build/' ./package.json
+cat <<EOD>./src/as-api.ts
+import {instantiateStreaming} from 'assemblyscript/lib/loader';
+
+interface API {
+  add(a: number, b: number): number;
+}
+
+const imports: any = {};
+
+export default instantiateStreaming<API>(fetch('./as.wasm'), imports);
+EOD
+```
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

@@ -1,5 +1,13 @@
 # Create React App + Assembly Script
 
+## Use
+
+```bash
+yarn serve
+```
+
+## Reproducible instruction
+
 ```
 yarn create react-app app --typescript
 cd app

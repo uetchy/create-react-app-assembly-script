@@ -1,11 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import API from './as-api';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import API from "./as-api";
+import "./App.css";
 
 function useAsyncEffect(
   fn: () => Promise<void | (() => void)>,
-  dependencies?: React.DependencyList,
+  dependencies?: React.DependencyList
 ) {
   return React.useEffect(() => {
     const destructorPromise = fn();
@@ -20,7 +20,7 @@ const App: React.FC = () => {
   const [value, setValue] = React.useState(0);
 
   useAsyncEffect(async () => {
-    const result = (await API).add(100, 100);
+    const result = (await API).exports.add(100, 100);
     setValue(result);
   }, []);
 
@@ -33,7 +33,8 @@ const App: React.FC = () => {
           className="App-link"
           href="https://reactjs.org"
           target="_blank"
-          rel="noopener noreferrer">
+          rel="noopener noreferrer"
+        >
           Learn React
         </a>
       </header>
